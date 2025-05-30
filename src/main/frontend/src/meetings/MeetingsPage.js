@@ -6,10 +6,30 @@ export default function MeetingsPage({username}) {
     const [meetings, setMeetings] = useState([]);
     const [addingNewMeeting, setAddingNewMeeting] = useState(false);
 
-    function handleNewMeeting(meeting) {
-        const nextMeetings = [...meetings, meeting];
-        setMeetings(nextMeetings);
-        setAddingNewMeeting(false);
+    // function handleNewMeeting(meeting) {
+    //     const nextMeetings = [...meetings, meeting];
+    //     setMeetings(nextMeetings);
+    //     setAddingNewMeeting(false);
+    // }
+    async function handleNewMeeting(meeting) {
+        // 1. Wyślij żądanie POST do backendu
+        const response = await fetch('/api/meetings', {
+            method: 'POST',
+            body: JSON.stringify(meeting),
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        // 2. Sprawdź, czy backend potwierdził dodanie
+        if (response.ok) {
+            // 3. Pobierz nową listę spotkań z backendu (masz pewność, że dane są aktualne)
+            const updatedMeetings = await fetch("/api/meetings").then(res => res.json());
+            setMeetings(updatedMeetings);
+            setAddingNewMeeting(false);
+            alert("Spotkanie zostało dodane!");
+        } else {
+            // 4. Obsłuż błąd
+            alert("Nie udało się dodać spotkania. Spróbuj ponownie!");
+        }
     }
 
     function handleDeleteMeeting(meeting) {
