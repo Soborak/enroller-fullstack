@@ -5,10 +5,12 @@ import NewMeetingForm from "./NewMeetingForm";
 export default function MeetingsPage({ username }) {
     const [meetings, setMeetings] = useState([]);
     const [addingNewMeeting, setAddingNewMeeting] = useState(false);
+    const BACKEND_URL = "https://agh-mwo-enroller-lab2-8447.onrender.com";
 
     // Pobierz spotkania po załadowaniu komponentu
     useEffect(() => {
-        fetch("/api/meetings")
+        fetch(`${BACKEND_URL}/api/meetings`)
+        //fetch("/api/meetings")
             .then(res => res.json())
             .then(setMeetings)
             .catch(() => alert("Nie udało się pobrać spotkań."));
@@ -16,14 +18,16 @@ export default function MeetingsPage({ username }) {
 
     // Dodawanie nowego spotkania
     async function handleNewMeeting(meeting) {
-        const response = await fetch('/api/meetings', {
+        const response = await fetch(`${BACKEND_URL}/api/meetings`, {
+        //const response = await fetch('/api/meetings', {
             method: 'POST',
             body: JSON.stringify(meeting),
             headers: { 'Content-Type': 'application/json' }
         });
 
         if (response.ok) {
-            const updatedMeetings = await fetch("/api/meetings").then(res => res.json());
+            const updatedMeetings = await fetch(`${BACKEND_URL}/api/meetings`).then(res => res.json());
+            //const updatedMeetings = await fetch("/api/meetings").then(res => res.json());
             setMeetings(updatedMeetings);
             setAddingNewMeeting(false);
             alert("Spotkanie zostało dodane!");
@@ -34,9 +38,11 @@ export default function MeetingsPage({ username }) {
 
     // Usuwanie spotkania
     async function handleDeleteMeeting(id) {
-        const response = await fetch(`/api/meetings/${id}`, { method: 'DELETE' });
+        const response = await fetch(`${BACKEND_URL}/api/meetings/${id}`, { method: 'DELETE' });
+        //const response = await fetch(`/api/meetings/${id}`, { method: 'DELETE' });
         if (response.ok) {
-            const updatedMeetings = await fetch("/api/meetings").then(res => res.json());
+            const updatedMeetings = await fetch(`${BACKEND_URL}/api/meetings`).then(res => res.json());
+            //const updatedMeetings = await fetch("/api/meetings").then(res => res.json());
             setMeetings(updatedMeetings);
         } else {
             alert("Nie udało się usunąć spotkania.");
