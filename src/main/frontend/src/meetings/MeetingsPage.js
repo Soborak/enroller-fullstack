@@ -5,7 +5,8 @@ import NewMeetingForm from "./NewMeetingForm";
 export default function MeetingsPage({ username }) {
     const [meetings, setMeetings] = useState([]);
     const [addingNewMeeting, setAddingNewMeeting] = useState(false);
-    const BACKEND_URL = "https://agh-mwo-enroller-lab2-8447.onrender.com";
+    //const BACKEND_URL = "https://agh-mwo-enroller-lab2-8447.onrender.com";
+    const BACKEND_URL = process.env.REACT_APP_API_URL;
 
     // Pobierz spotkania po załadowaniu komponentu
     useEffect(() => {
