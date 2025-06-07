@@ -4,7 +4,8 @@ public class Const {
 
     public final static String HOME_PAGE = "http://localhost:8080/";
 
-
+    public static final String MEETING_IV_TITLE = "Spotkanie IV";
+    public static final String MEETING_V_TITLE = "Spotkanie V";
 
     // OBJECTS
     public final static String USER_I_NAME = "user1@gmail.com";
