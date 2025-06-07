@@ -25,7 +25,6 @@ public class MeetingsPage extends BasePage {
     @FindBy(css = "form > button")
     public WebElement confirmMeetingBtn;
 
-
     public MeetingsPage(WebDriver driver) {
         super(driver);
     }

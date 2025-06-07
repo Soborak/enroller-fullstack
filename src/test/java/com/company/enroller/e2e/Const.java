@@ -17,8 +17,6 @@ public class Const {
     public final static String MEETING_III_TITLE = "Meeting C";
     public final static String MEETING_DESC = "Meeting Description";
 
-
-
     // LABELS
     public final static String NEW_MEETING_BTN_LABEL = "Dodaj nowe spotkanie";
 

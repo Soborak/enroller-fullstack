@@ -60,9 +60,12 @@ public class MeetingRestController {
         meetingService.delete(meeting);
         return new ResponseEntity<Meeting>(meeting, HttpStatus.NO_CONTENT);
     }
-
+    //dodaję walidację tytułu spotkania!
     @RequestMapping(value = "", method = RequestMethod.POST)
     public ResponseEntity<?> addMeeting(@RequestBody Meeting meeting) {
+        if (meeting.getTitle() == null || meeting.getTitle().trim().isEmpty()) {
+            return new ResponseEntity<String>("Tytuł spotkania jest wymagany.", HttpStatus.BAD_REQUEST);
+        }
         if (meetingService.alreadyExist(meeting)) {
             return new ResponseEntity<String>("Unable to add. A meeting with title " + meeting.getTitle() + " and date "
                     + meeting.getDate() + " already exist.", HttpStatus.CONFLICT);
